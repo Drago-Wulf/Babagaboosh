@@ -14,6 +14,8 @@ $AzureApiOutputBox.Multiline = $False
 $AzureApiOutputBox.Size = New-Object System.Drawing.Size(200,200)
 $AzureApiOutputBox.Location = New-Object Drawing.Point(20,60)
 
+$wshell = New-Object -ComObject Wscript.Shell
+
 $AzureRegionOutputBox = New-Object System.Windows.Forms.textbox
 $AzureRegionOutputBox.Text = "AZURE_REGION"
 $AzureRegionOutputBox.Multiline = $False
@@ -48,6 +50,9 @@ $CreateButton.Add_Click({
     [Environment]::SetEnvironmentVariable("AZURE_REGION", $AzureRegion, [System.EnvironmentVariableTarget]::User)
     [Environment]::SetEnvironmentVariable("ELEVENLABS_API_KEY", $ElevenLabsApiKey, [System.EnvironmentVariableTarget]::User)
     [Environment]::SetEnvironmentVariable("OPENAI_API_KEY", $OpenAiApiKey, [System.EnvironmentVariableTarget]::User)
+    
+    $wshell.Popup("Variables Set",0,"Done",0x1)
+
 
 })
 
@@ -62,6 +67,8 @@ $ClearButton.Add_Click({
     [Environment]::SetEnvironmentVariable("AZURE_REGION", [NullString]::Value , [System.EnvironmentVariableTarget]::User)
     [Environment]::SetEnvironmentVariable("ELEVENLABS_API_KEY", [NullString]::Value , [System.EnvironmentVariableTarget]::User)
     [Environment]::SetEnvironmentVariable("OPENAI_API_KEY", [NullString]::Value, [System.EnvironmentVariableTarget]::User)
+
+    $wshell.Popup("Variables Cleared",0,"Done",0x1)
 })
 
 $Form = New-Object Windows.Forms.Form
